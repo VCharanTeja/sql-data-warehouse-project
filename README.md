@@ -128,3 +128,59 @@ dwh_project/
 ├── init_database.sql            # Database and schema setup
 
 └── README.md
+
+---
+
+## 🚀 How to Run
+
+1. Clone the repository
+```bash
+git clone https://github.com/your-username/sql-data-warehouse-project.git
+```
+
+2. Open pgAdmin and connect to your PostgreSQL server
+
+3. Execute scripts in order:
+```sql
+-- Step 1: Initialize database and schemas
+init_database.sql
+
+-- Step 2: Create and load bronze layer
+scripts/bronze/create_bronze.sql
+CALL bronze.load_bronze();
+
+-- Step 3: Create and load silver layer
+scripts/silver/load_silver.sql
+CALL silver.load_silver();
+
+-- Step 4: Create gold views
+scripts/gold/create_gold_views.sql
+```
+
+4. Query the gold layer:
+```sql
+SELECT * FROM gold.dim_customers;
+SELECT * FROM gold.dim_products;
+SELECT * FROM gold.fact_sales;
+```
+
+---
+
+## 🎯 Project Outcome
+
+This project simulates a real-world data warehouse by:
+- Building a fully layered ETL pipeline from raw CSV to analytical views
+- Applying data quality rules and business logic at the Silver layer
+- Creating a clean star schema ready for BI tools and reporting
+- Documenting the full data architecture and integration model
+
+---
+
+## 💡 Future Enhancements
+- [ ] Build a Power BI or Tableau dashboard on top of the gold views
+- [ ] Add incremental loading to the bronze layer
+- [ ] Implement data quality checks as automated test scripts
+
+---
+
+⭐ If you found this project useful, consider starring the repository — it helps others discover it!
