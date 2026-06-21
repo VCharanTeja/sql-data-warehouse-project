@@ -94,3 +94,36 @@ LEFT JOIN, GROUP BY, NULLIF()
 ---
 
 ## 📂 Project Structure
+dwh_project/
+
+├── datasets/
+
+│   ├── source_crm/              # CRM source CSV files
+
+│   └── source_erp/              # ERP source CSV files
+
+├── docs/
+
+│   ├── data_architecture.png    # Architecture diagram
+
+│   ├── data_catalog.md          # Table and column documentation
+
+│   ├── data_flow.png            # Data flow diagram
+
+│   ├── data_integration.png     # Integration diagram
+
+│   └── data_model.png           # Star schema model
+
+├── scripts/
+
+│   ├── bronze/                  # Raw data loading scripts
+
+│   ├── silver/                  # Data cleansing scripts
+
+│   ├── gold/                    # Analytical view scripts
+
+│   └── tests/                   # Data quality test scripts
+
+├── init_database.sql            # Database and schema setup
+
+└── README.md
