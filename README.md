@@ -127,32 +127,44 @@ git clone https://github.com/your-username/sql-data-warehouse-project.git
 
 2. Open pgAdmin and connect to your PostgreSQL server
 
-3. Execute scripts in order:
+3. Execute scripts in this order:
 ```sql
 -- Step 1: Initialize database and schemas
-init_database.sql
+scripts/init_database.sql
 
--- Step 2: Create and load bronze layer
-scripts/bronze/.sql
+-- Step 2: Create bronze tables
+scripts/bronze/ddl_bronze.sql
+
+-- Step 3: Load raw data into bronze layer
+scripts/bronze/proc_load_bronze.sql
 CALL bronze.load_bronze();
 
--- Step 3: Create and load silver layer
-scripts/silver/load_silver.sql
+-- Step 4: Create silver tables
+scripts/silver/ddl_silver.sql
+
+-- Step 5: Load cleansed data into silver layer
+scripts/silver/proc_load_silver.sql
 CALL silver.load_silver();
 
--- Step 4: Create gold views
-scripts/gold/create_gold_views.sql
+-- Step 6: Create gold analytical views
+scripts/gold/proc_load_gold.sql
 ```
 
-4. Query the gold layer:
+4. Run quality checks:
+```sql
+-- Validate silver layer
+scripts/tests/quality_checks_silver.sql
+
+-- Validate gold layer
+scripts/tests/quality_checks_gold.sql
+```
+
+5. Query the gold layer:
 ```sql
 SELECT * FROM gold.dim_customers;
 SELECT * FROM gold.dim_products;
 SELECT * FROM gold.fact_sales;
 ```
-
----
-
 ## 🎯 Project Outcome
 
 This project simulates a real-world data warehouse by:
