@@ -94,6 +94,7 @@ LEFT JOIN, GROUP BY, NULLIF()
 ---
 
 ## 📂 Project Structure
+
 dwh_project/
 
 ├── datasets/
