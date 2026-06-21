@@ -35,3 +35,62 @@ transform it into clean, business-ready analytical views through structured ETL 
 ## 🔄 Data Flow
 
 ![Data Flow](docs/data_flow.png)
+
+---
+
+## 📊 Data Model
+
+![Data Model](docs/data_model.png)
+
+| Object | Type | Description |
+|---|---|---|
+| `gold.dim_customers` | Dimension Table | Cleaned and integrated customer details including name, gender, marital status, birthdate and country — sourced from CRM and ERP |
+| `gold.dim_products` | Dimension Table | Product details including category, subcategory, product line and cost — filtered to active products only |
+| `gold.fact_sales` | Fact Table | Sales transactions with order dates, shipping dates, quantity, price and sales amount — linked to customers and products via surrogate keys |
+
+---
+
+## 🛠️ Transformations Applied (Silver Layer)
+
+### Data Cleansing
+- Removed duplicates using `ROW_NUMBER()` window function
+- Handled NULL and invalid values using `COALESCE` and `CASE`
+- Fixed invalid dates stored as integers
+- Removed unwanted prefixes and spaces from IDs
+
+### Data Standardization
+- Normalized gender values to `Male`, `Female`, `n/a`
+- Normalized marital status to `Single`, `Married`, `n/a`
+- Normalized country codes to full country names
+
+### Data Enrichment
+- Derived product end dates using `LEAD()` window function
+- Recalculated incorrect sales figures from quantity and price
+- Integrated CRM and ERP customer data — CRM treated as master source
+
+---
+
+## 🧠 Key SQL Concepts Used
+
+```sql
+-- Stored Procedures
+CREATE OR REPLACE PROCEDURE silver.load_silver()
+
+-- Window Functions
+ROW_NUMBER() OVER (PARTITION BY cst_id ORDER BY cst_create_date DESC)
+LEAD(prd_start_dt) OVER (PARTITION BY prd_key ORDER BY prd_start_dt)
+
+-- Conditional Logic
+CASE WHEN ... THEN ... END
+COALESCE(value, 'n/a')
+
+-- Data Type Casting
+CAST(CAST(sls_order_dt AS VARCHAR) AS DATE)
+
+-- Aggregations and Joins
+LEFT JOIN, GROUP BY, NULLIF()
+```
+
+---
+
+## 📂 Project Structure
