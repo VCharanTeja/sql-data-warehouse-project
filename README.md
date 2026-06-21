@@ -95,6 +95,7 @@ LEFT JOIN, GROUP BY, NULLIF()
 
 ## 📂 Project Structure
 
+```
 dwh_project/
 │
 ├── datasets/                           # Raw datasets used for the project (ERP and CRM data)
@@ -103,21 +104,28 @@ dwh_project/
 │
 ├── docs/                               # Project documentation and architecture details
 │   ├── data_architecture.png           # Architecture diagram of the data warehouse
-│   ├── data_catalog.md                 # Catalog of datasets including field descriptions and metadata
-│   ├── data_flow.png                   # Data flow diagram across Bronze, Silver and Gold layers
-│   ├── data_integration.png            # Integration diagram showing how CRM and ERP data connects
+│   ├── data_catalog.md                 # Catalog of datasets including field descriptions
+│   ├── data_flow.png                   # Data flow diagram across Bronze, Silver and Gold
+│   ├── data_integration.png            # Integration diagram showing how CRM and ERP connects
 │   └── data_model.png                  # Star schema data model diagram
 │
 ├── scripts/                            # SQL scripts for ETL and transformations
 │   ├── bronze/                         # Scripts for extracting and loading raw data
+│   │   ├── ddl_bronze.sql              # Create bronze tables
+│   │   └── proc_load_bronze.sql        # Load raw data into bronze
 │   ├── silver/                         # Scripts for cleansing and transforming data
+│   │   ├── ddl_silver.sql              # Create silver tables
+│   │   └── proc_load_silver.sql        # Load cleansed data into silver
 │   ├── gold/                           # Scripts for creating analytical views
-│   └── tests/                          # Data quality and validation test scripts
+│   │   └── proc_load_gold.sql          # Create gold views
+│   └── tests/                          # Data quality and validation scripts
+│       ├── quality_checks_silver.sql   # Silver layer quality checks
+│       └── quality_checks_gold.sql     # Gold layer quality checks
 │
 ├── init_database.sql                   # Database and schema initialization script
 ├── README.md                           # Project overview and instructions
 └── LICENSE                             # License information for the repository
-
+```
 ## 🚀 How to Run
 
 1. Clone the repository
