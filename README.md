@@ -96,40 +96,27 @@ LEFT JOIN, GROUP BY, NULLIF()
 ## 📂 Project Structure
 
 dwh_project/
-
-├── datasets/
-
-│   ├── source_crm/              # CRM source CSV files
-
-│   └── source_erp/              # ERP source CSV files
-
-├── docs/
-
-│   ├── data_architecture.png    # Architecture diagram
-
-│   ├── data_catalog.md          # Table and column documentation
-
-│   ├── data_flow.png            # Data flow diagram
-
-│   ├── data_integration.png     # Integration diagram
-
-│   └── data_model.png           # Star schema model
-
-├── scripts/
-
-│   ├── bronze/                  # Raw data loading scripts
-
-│   ├── silver/                  # Data cleansing scripts
-
-│   ├── gold/                    # Analytical view scripts
-
-│   └── tests/                   # Data quality test scripts
-
-├── init_database.sql            # Database and schema setup
-
-└── README.md
-
----
+│
+├── datasets/                           # Raw datasets used for the project (ERP and CRM data)
+│   ├── source_crm/                     # CRM source CSV files
+│   └── source_erp/                     # ERP source CSV files
+│
+├── docs/                               # Project documentation and architecture details
+│   ├── data_architecture.png           # Architecture diagram of the data warehouse
+│   ├── data_catalog.md                 # Catalog of datasets including field descriptions and metadata
+│   ├── data_flow.png                   # Data flow diagram across Bronze, Silver and Gold layers
+│   ├── data_integration.png            # Integration diagram showing how CRM and ERP data connects
+│   └── data_model.png                  # Star schema data model diagram
+│
+├── scripts/                            # SQL scripts for ETL and transformations
+│   ├── bronze/                         # Scripts for extracting and loading raw data
+│   ├── silver/                         # Scripts for cleansing and transforming data
+│   ├── gold/                           # Scripts for creating analytical views
+│   └── tests/                          # Data quality and validation test scripts
+│
+├── init_database.sql                   # Database and schema initialization script
+├── README.md                           # Project overview and instructions
+└── LICENSE                             # License information for the repository
 
 ## 🚀 How to Run
 
@@ -146,7 +133,7 @@ git clone https://github.com/your-username/sql-data-warehouse-project.git
 init_database.sql
 
 -- Step 2: Create and load bronze layer
-scripts/bronze/create_bronze.sql
+scripts/bronze/.sql
 CALL bronze.load_bronze();
 
 -- Step 3: Create and load silver layer
